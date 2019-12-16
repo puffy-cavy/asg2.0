@@ -9,15 +9,12 @@ pipeline{
 		stage('DEV'){
 			steps{
 				script{
-					try{
-						timeout(time: 5, unit: 'MINUTES'){
-							STACK_NAME = input(id: 'stackName', message: 'Input stack name you want to query on', parameters: [[$class: 'TextParameterDefinition', defaultValue: '', description: '', name: '']])
-							}
-						}
-					catch(e){
-						echo('Skipping Updating Autoscaling group')
-						throw e
-						}
+					APP_CHOICES = ["MPA", "FSNext"];
+					APPLICATION = input message: 'Choose the application the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',
+								  parameters:[choice(choices: APP_CHOICES, description: '', name:'')] 
+					ENV_CHOICES = ["dev", "qa", "stg"];
+					APPLICATION = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
+								  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')] 
 					try{
 						timeout(time: 5, unit: 'MINUTES'){
 							DESIRED_CAPACITY = input(id: 'desiredCapacity', message: 'Input desried capacity of the auto scaling group', parameters: [[$class: 'TextParameterDefinition', defaultValue: '', description: '', name: '']])
@@ -47,7 +44,7 @@ pipeline{
 						echo('Skipping Updating Autoscaling group')
 						throw e
 						}
-					env.STACK_NAME = "${STACK_NAME}"
+					env.STACK_NAME = "${APPLICATION}"
 					env.DESIRED_CAPACITY = "${DESIRED_CAPACITY}"
 					env.MIN_SIZE = "${MIN_SIZE}"
 					env.MAX_SIZE = "${MAX_SIZE}"
