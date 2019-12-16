@@ -9,7 +9,7 @@ pipeline{
 		stage('DEV'){
 			steps{
 				script{
-					APP_CHOICES = ["MPA", "FSNext"];
+					APP_CHOICES = ["mpa", "fsn"];
 					APPLICATION = input message: 'Choose the application the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',
 								  parameters:[choice(choices: APP_CHOICES, description: '', name:'')] 
 					ENV_CHOICES = ["dev", "qa", "stg"];
