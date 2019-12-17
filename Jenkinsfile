@@ -17,7 +17,11 @@ pipeline{
 					 			  	   parameters: [[$class: 'ChoiceParameterDefinition',
                              	  	   choices: APP_CHOICES.join('\n'),
                              		   name: 'APPLICATION',
-                             		   description: 'Menu - select application option']])
+                             		   description: 'Menu - select application option'],
+									   [$class: 'ChoiceParameterDefinition',
+                             	  	   choices: ENV_CHOICES.join('\n'),
+                             		   name: 'ENVIRONMENT',
+                             		   description: 'Menu - select environment option']])
 
 					  
 					ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
