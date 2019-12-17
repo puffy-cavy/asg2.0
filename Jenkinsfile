@@ -20,7 +20,7 @@ pipeline{
 
 					sh "source nameFinder.sh > nameList"
 					NAME_LIST = readFile('nameList').trim()
-					echo ${NAME_LIST}
+					echo "${NAME_LIST}"
 					
 
 					
