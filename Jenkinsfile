@@ -52,6 +52,9 @@ pipeline{
                                             description: 'max size for the auto scaling group',
                                             name: 'MAX_SIZE'),
                             ])
+							env.DESIRED_CAPACITY = SIZE_PARAM.DESIRED_CAPACITY
+							env.MIN_SIZE = SIZE_PARAM.MIN_SIZE
+							env.MAX_SIZE = SIZE_PARAM.MAX_SIZE
 							}
 						}
 					catch(e){
@@ -59,9 +62,9 @@ pipeline{
 						throw e
 						}
 	
-					env.DESIRED_CAPACITY = SIZE_PARAM.DESIRED_CAPACITY
-					env.MIN_SIZE = SIZE_PARAM.MIN_SIZE
-					env.MAX_SIZE = SIZE_PARAM.MAX_SIZE
+					// env.DESIRED_CAPACITY = SIZE_PARAM.DESIRED_CAPACITY
+					// env.MIN_SIZE = SIZE_PARAM.MIN_SIZE
+					// env.MAX_SIZE = SIZE_PARAM.MAX_SIZE
 					sh "source jenkins_bash.sh"
 
 					}
