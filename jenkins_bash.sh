@@ -4,9 +4,8 @@ export PATH=/usr/local/bin:$PATH
 
 
 echo ${STACK_NAME}
-fullStackName=`aws cloudformation describe-stacks --query 'Stacks[*].[StackName]' --output text | grep -m 1 ${STACK_NAME}`
-aws cloudformation list-stack-resources --stack-name $fullStackName --query 'StackResourceSummaries[*].{ResourceType: ResourceType,PhysicalId: PhysicalResourceId, Status: ResourceStatus, LastUpdated: LastUpdatedTimestamp}'
-groupName=`aws cloudformation list-stack-resources --stack-name $fullStackName --query 'StackResourceSummaries[*].[ResourceType,PhysicalResourceId]' --output text | grep AWS::AutoScaling::AutoScalingGroup | awk '{print $2}'`
+aws cloudformation list-stack-resources --stack-name $STACK_NAME --query 'StackResourceSummaries[*].{ResourceType: ResourceType,PhysicalId: PhysicalResourceId, Status: ResourceStatus, LastUpdated: LastUpdatedTimestamp}'
+groupName=`aws cloudformation list-stack-resources --stack-name $STACK_NAME --query 'StackResourceSummaries[*].[ResourceType,PhysicalResourceId]' --output text | grep AWS::AutoScaling::AutoScalingGroup | awk '{print $2}'`
 if [[ $groupName =~ " " ]] || [[ $groupName = "" ]]; then
 	echo 'ABORTED: no match autoscaling group found'
 	exit -1
