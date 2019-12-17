@@ -12,10 +12,10 @@ pipeline{
 					APP_CHOICES = ["mpa", "fsn"];
 					ENV_CHOICES = ["dev", "qa", "stg"];
 					APPLICATION = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',
-					 			  parameters {[choice(choices: APP_CHOICES, description: '', name:'')],
+					 			  parameters: [choice(choices: APP_CHOICES, description: '', name:'')],
 								   			  [choice(choices: ENV_CHOICES, description: '', name:'')]
 
-								  }  
+								  
 					ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
 								  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
 					env.APP_NAME = "${APPLICATION}"
