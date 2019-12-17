@@ -19,7 +19,7 @@ pipeline{
 					env.ENV_NAME = "${ENVIRONMENT}"
 
 					sh "source nameFinder.sh"
-
+					echo("${env.STACK_LIST}")
 
 					
 
