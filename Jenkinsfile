@@ -14,15 +14,11 @@ pipeline{
 					// def INPUT_PARAMS = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',
 					// 			  parameter: [choice(name:'APPLICATION', choices: APP_CHOICES, description: ''),
 					//			   			  choice(name:'ENVIRONMENT', choices: ENV_CHOICES, description: '')]
-					def INPUT_PARAMS = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',
+					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
 					 			  	   parameter: [[$class: 'ChoiceParameterDefinition',
-                             	  	   choices: APP_CHOICES.join('\n'),
+                             	  	   choices: ['no','yes'].join('\n'),
                              		   name: 'APPLICATION',
-                             		   description: 'Menu - select box option'],
-								   		[$class: 'ChoiceParameterDefinition',
-                             	  	   choices: ENV_CHOICES.join('\n'),
-                             		   name: 'ENVIRONMENT',
-                             		   description: 'Menu - select box option']]
+                             		   description: 'Menu - select box option']])
 
 					  
 					ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
