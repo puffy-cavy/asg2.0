@@ -18,8 +18,8 @@ pipeline{
 					env.APP_NAME = "${APPLICATION}"
 					env.ENV_NAME = "${ENVIRONMENT}"
 
-					STACK_LIST = sh ("source nameFinder.sh")
-					echo "${STACK_LIST}"
+					sh "source nameFinder.sh > nameList"
+					NAME_LIST = readFile('nameList').trim()
 					
 
 					
