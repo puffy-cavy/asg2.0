@@ -18,8 +18,9 @@ pipeline{
 					env.APP_NAME = "${APPLICATION}"
 					env.ENV_NAME = "${ENVIRONMENT}"
 
-					sh "source nameFinder.sh"
-					echo("${env.STACK_LIST}")
+					STACK_LIST = sh ("source nameFinder.sh")
+					echo "${STACK_LIST}"
+					
 
 					
 
