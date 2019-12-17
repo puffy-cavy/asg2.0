@@ -24,8 +24,8 @@ pipeline{
                              		   description: 'Menu - select environment option']])
 
 					  
-					ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
-								  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
+					// ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
+					// 			  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
 					env.APP_NAME = "${APPLICATION}"
 					env.ENV_NAME = "${ENVIRONMENT}"
 
@@ -41,7 +41,17 @@ pipeline{
 
 					try{
 						timeout(time: 5, unit: 'MINUTES'){
-							DESIRED_CAPACITY = input(id: 'desiredCapacity', message: 'Input desried capacity of the auto scaling group', parameters: [[$class: 'TextParameterDefinition', defaultValue: '', description: '', name: '']])
+							def SIZE_PARAM = input(id: 'sizeChoice', message: 'Enter the size for the auto scaling group',
+                            	parameters: [string(defaultValue: 'None',
+                                            description: 'desired capacity for the auto scaling group',
+                                            name: 'DESIRED_CAPACITY'),
+                                    		string(defaultValue: 'None',
+                                            description: 'min size for the auto scaling group',
+                                            name: 'MIN_SIZE'),
+											string(defaultValue: 'None',
+                                            description: 'max size for the auto scaling group',
+                                            name: 'MAX_SIZE'),
+                            ])
 							}
 						}
 					catch(e){
