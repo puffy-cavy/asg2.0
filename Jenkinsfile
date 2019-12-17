@@ -22,12 +22,12 @@ pipeline{
                              	  	   choices: ENV_CHOICES.join('\n'),
                              		   name: 'ENVIRONMENT',
                              		   description: 'Menu - select environment option']])
-
-					  
+					env.APP_NAME = userInput.APPLICATION
+					env.ENV_NAME = userInput.ENVIRONMENT
 					// ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
 					// 			  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
-					env.APP_NAME = "${APPLICATION}"
-					env.ENV_NAME = "${ENVIRONMENT}"
+					// env.APP_NAME = "${APPLICATION}"
+					// env.ENV_NAME = "${ENVIRONMENT}"
 
 					sh "source nameFinder.sh > nameList"
 					NAME_LIST = readFile('nameList').trim()
