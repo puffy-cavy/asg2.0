@@ -27,3 +27,17 @@ def INPUT_PARAMS = input(message: 'Choose the application and the environment th
 					env.ENV_NAME = INPUT_PARAMS.ENVIRONMENT
 ```
 parameters在input里和在script外的表现形式也不一样，，，反正input里的parameters是[]。。。
+#### 3.
+把一个list从bash里传出去：
+```
+STACK_LIST=($(aws cloudformation describe-stacks --query 'Stacks[*].[StackName]' --output text | grep -w ${ENV_NAME}.*${APP_NAME}.*cluster))
+echo ${STACK_LIST[*]}
+```
+return value外面加括号表示是list，传出去的要用[*]代表一个list
+传进Jenkins的时候：
+```
+sh "source nameFinder.sh > nameList"
+NAME_LIST = readFile('nameList').trim()
+CLUSTER_CHOICE = NAME_LIST.split() as List
+```
+read进file 再trim
