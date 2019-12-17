@@ -42,13 +42,13 @@ pipeline{
 					try{
 						timeout(time: 5, unit: 'MINUTES'){
 							def SIZE_PARAM = input(id: 'sizeChoice', message: 'Enter the size for the auto scaling group',
-                            	parameters: [string(defaultValue: 'None',
+                            	parameters: [string(defaultValue: '',
                                             description: 'desired capacity for the auto scaling group',
                                             name: 'DESIRED_CAPACITY'),
-                                    		string(defaultValue: 'None',
+                                    		string(defaultValue: '',
                                             description: 'min size for the auto scaling group',
                                             name: 'MIN_SIZE'),
-											string(defaultValue: 'None',
+											string(defaultValue: '',
                                             description: 'max size for the auto scaling group',
                                             name: 'MAX_SIZE'),
                             ])
@@ -58,30 +58,10 @@ pipeline{
 						echo('Skipping Updating Autoscaling group')
 						throw e
 						}
-
-					try{
-						timeout(time: 5, unit: 'MINUTES'){
-							MIN_SIZE = input(id: 'minSize', message: 'Input minimum size of the auto scaling group', parameters: [[$class: 'TextParameterDefinition', defaultValue: '', description: '', name: '']])
-							}
-						}
-					catch(e){
-						echo('Skipping Updating Autoscaling group')
-						throw e
-						}
-
-					try{
-						timeout(time: 5, unit: 'MINUTES'){
-							MAX_SIZE = input(id: 'maxSize', message: 'Input maximum size of the auto scaling group', parameters: [[$class: 'TextParameterDefinition', defaultValue: '', description: '', name: '']])
-							}
-						}
-					catch(e){
-						echo('Skipping Updating Autoscaling group')
-						throw e
-						}
 	
-					env.DESIRED_CAPACITY = "${DESIRED_CAPACITY}"
-					env.MIN_SIZE = "${MIN_SIZE}"
-					env.MAX_SIZE = "${MAX_SIZE}"
+					env.DESIRED_CAPACITY = SIZE_PARAM.DESIRED_CAPACITY
+					env.MIN_SIZE = SIZE_PARAM.MIN_SIZE
+					env.MAX_SIZE = SIZE_PARAM.MAX_SIZE
 					sh "source jenkins_bash.sh"
 
 					}
