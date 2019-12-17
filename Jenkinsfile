@@ -15,7 +15,7 @@ pipeline{
 					// 			  parameter: [choice(name:'APPLICATION', choices: APP_CHOICES, description: ''),
 					//			   			  choice(name:'ENVIRONMENT', choices: ENV_CHOICES, description: '')]
 					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
-					 			  	   parameter: [[$class: 'ChoiceParameterDefinition',
+					 			  	   parameters: [[$class: 'ChoiceParameterDefinition',
                              	  	   choices: ['no','yes'].join('\n'),
                              		   name: 'APPLICATION',
                              		   description: 'Menu - select box option']])
