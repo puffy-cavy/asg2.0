@@ -15,7 +15,7 @@ pipeline{
 					ENV_CHOICES = ["dev", "qa", "stg"];
 					ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
 								  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
-					env.APP_NAME = "${APPLICATION}"
+					// env.APP_NAME = "${APPLICATION}"
 					env.ENV_NAME = "${ENVIRONMENT}"
 
 					sh "source nameFinder.sh > nameList"
