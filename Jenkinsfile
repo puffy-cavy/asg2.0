@@ -22,8 +22,8 @@ pipeline{
                              	  	   choices: ENV_CHOICES.join('\n'),
                              		   name: 'ENVIRONMENT',
                              		   description: 'Menu - select environment option']])
-					env.APP_NAME = userInput.APPLICATION
-					env.ENV_NAME = userInput.ENVIRONMENT
+					env.APP_NAME = INPUT_PARAMS.APPLICATION
+					env.ENV_NAME = INPUT_PARAMS.ENVIRONMENT
 					// ENVIRONMENT = input message: 'Choose the environment the autoscaling group belongs to', ok : "Confirm", id: 'environmentChoice',
 					// 			  parameters:[choice(choices: ENV_CHOICES, description: '', name:'')]
 					// env.APP_NAME = "${APPLICATION}"
