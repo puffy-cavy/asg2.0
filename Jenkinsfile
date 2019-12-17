@@ -20,8 +20,9 @@ pipeline{
 
 					sh "source nameFinder.sh > nameList"
 					NAME_LIST = readFile('nameList').trim()
+					CLUSTER_CHOICE = NAME_LIST.split()
 					CLUSTER = input message: 'Choose the cluster that need to be auto-scaled', ok : "Confirm", id: 'clusterChoice',
-				              parameters:[choice(choices: NAME_LIST.split(), description: '', name:'')]	
+				              parameters:[choice(choices: CLUSTER_CHOICE, description: '', name:'')]	
 
 
 					
