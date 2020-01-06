@@ -7,9 +7,9 @@ pipeline{
 	agent any
 	stages {
 		stage('nonprod power scheduler'){
-			agent {
-                 label 'awsjenklinux'
-             }
+			// agent {
+            //      label 'awsjenklinux'
+            //  }
              environment {
                  PWD = pwd()
                  CURRENT_STAGE = 'non-prod'
