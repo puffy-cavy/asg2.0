@@ -6,12 +6,34 @@ def MAX_SIZE
 pipeline{
 	agent any
 	stages {
-		stage('DEV'){
+		stage('nonprod power scheduler'){
+			agent {
+                 label 'awsjenklinux'
+             }
+             environment {
+                 PWD = pwd()
+                 CURRENT_STAGE = 'non-prod'
+                 CURRENT_ACTIVITY = 'deploy'
+             }
 			steps{
 				script{
+					ACCOUNT_CHOICES = ["Non-prod", "Prod"];
+					ACCOUNT_PARAMS = input message: 'The ECS cluster modified is in Prod/ Non-prod account?', ok : "Confirm", id: 'accountChoice',parameter: [choice(name:'ACCOUNT', choices: ACCOUNT_CHOICES, description: '')]
+					if ("${ACCOUNT}" == "Non-prod") {
+						ENV_CHOICES = ["dev", "qa", "stg"];
+					}
+					else if ("${ACCOUNT}" == "Prod") {
+						ENV_CHOICES = ["uat", "prod"];
+					}
+					else {
+						echo 'Input is wrong, go check'
+					}
 					APP_CHOICES = ["mpa", "fsn"];
-					ENV_CHOICES = ["dev", "qa", "stg"];
+					
 
+					Profile="work-deploy-non-prod"
+					sh 'chmod 777 aws-setup-credentials.sh'
+                	sh 'aws-setup-credentials.sh'
 					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
 					 			  	   parameters: [[$class: 'ChoiceParameterDefinition',
                              	  	   choices: APP_CHOICES.join('\n'),
@@ -62,11 +84,5 @@ pipeline{
 				}
 			}
 
-
-		stage('QA'){
-			steps{
-				sh "echo [QA STAGE]"
-			}
-		}
 	}
 }

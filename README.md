@@ -40,4 +40,17 @@ sh "source nameFinder.sh > nameList"
 NAME_LIST = readFile('nameList').trim()
 CLUSTER_CHOICE = NAME_LIST.split() as List
 ```
-read进file 再trim
+read进file 再trim		
+					
+#### 4.
+我搞出来该怎么限制哪个用户能build这个project了。参考https://plugins.jenkins.io/authorize-project
+先安装plugin：authorize project，进manage jenkins>configure global security>authorization>Project-based Matrix Authorization Strategy
+一定要unchecked authenticated user，否则，任何log in进去的user都有相同的权限
+然后添加各个username并选择权限
+在同一个页面的Access Control for Builds里，都选 Run as User who Triggered Build
+貌似选Run as Specific User就只能添加一个user，并且不管谁run一个build，都拥有这个specific user的权限。
+然后在每一个project里都有Ahthorization,还要选一下run as user who triggered build
+最后在每个project里再选谁可以access
+
+
+		
