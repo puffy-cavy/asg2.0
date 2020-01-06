@@ -10,7 +10,7 @@ input语句在script外和script里的syntax不一样！！！！Jenkins documen
 https://stackoverflow.com/questions/47080683/read-interactive-input-in-jenkins-pipeline-to-a-variable
 曾经一个页面一个input的时候：
 ```
-INPUT_PARAMS = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',parameter: [choice(name:'APPLICATION', choices: APP_CHOICES, description: '')]
+INPUT_PARAMS = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',parameters: [choice(name:'APPLICATION', choices: APP_CHOICES, description: '')]
 env.APP_NAME = "${APPLICATION}"
 ```
 现在一个页面多个input的时候：

@@ -18,7 +18,7 @@ pipeline{
 			steps{
 				script{
 					ACCOUNT_CHOICES = ["Non-prod", "Prod"];
-					ACCOUNT_PARAMS = input message: 'The ECS cluster modified is in Prod/ Non-prod account?', ok : "Confirm", id: 'accountChoice',parameter: [choice(name:'ACCOUNT', choices: ACCOUNT_CHOICES, description: '')]
+					ACCOUNT_PARAMS = input message: 'The ECS cluster modified is in Prod/ Non-prod account?', ok : "Confirm", id: 'accountChoice',parameters: [choice(name:'ACCOUNT', choices: ACCOUNT_CHOICES, description: '')]
 					if ("${ACCOUNT}" == "Non-prod") {
 						ENV_CHOICES = ["dev", "qa", "stg"];
 					}
