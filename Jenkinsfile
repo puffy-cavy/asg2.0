@@ -23,11 +23,11 @@ pipeline{
 
 					if (ACCOUNT_PARAMS == "Non-prod") {
 						ENV_CHOICES = ["dev", "qa", "stg"];
-						echo ENV_CHOICES
+						echo "1"
 					}
 					else if (ACCOUNT_PARAMS == "Prod") {
 						ENV_CHOICES = ["uat", "prod"];
-						echo ENV_CHOICES
+						echo "2"
 					}
 					else {
 						echo 'Input is wrong, go check'
