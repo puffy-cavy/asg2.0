@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+pip install json
 echo echo "============================================================================="
 echo " Setting up credentials with profile: ${Profile} . ."
 echo echo "============================================================================="
