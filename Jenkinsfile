@@ -33,9 +33,9 @@ pipeline{
 					APP_CHOICES = ["mpa", "fsn"];
 					
 
-					// env.Profile="work-deploy-non-prod"
-					// sh 'chmod 777 aws-setup-credentials.sh'
-                	// sh 'source aws-setup-credentials.sh' //cannot call the shell script without source
+					env.Profile="work-deploy-non-prod"
+					sh 'chmod 777 aws-setup-credentials.sh'
+                	sh 'source aws-setup-credentials.sh' //cannot call the shell script without source
 					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
 					 			  	   parameters: [[$class: 'ChoiceParameterDefinition',
                              	  	   choices: APP_CHOICES.join('\n'),
