@@ -10,16 +10,16 @@ pipeline{
 			// agent {
             //      label 'awsjenklinux'
             //  }
-             environment {
-                 PWD = pwd()
-                 CURRENT_STAGE = 'non-prod'
-                 CURRENT_ACTIVITY = 'deploy'
-             }
+            //  environment {
+            //      PWD = pwd()
+            //      CURRENT_STAGE = 'non-prod'
+            //      CURRENT_ACTIVITY = 'deploy'
+            //  }
 			steps{
 				script{
 					ACCOUNT_CHOICES = ["Non-prod", "Prod"];
 					def ACCOUNT_PARAMS = input(message: 'The ECS cluster modified is in Prod/ Non-prod account?', id: 'accountChoice',
-					                            parameters: [[$class: 'ChoiceParameterDefinition', choices: ACCOUNT_CHOICES.join('\n'), name:'ACCOUNT',description: '']])
+					                            parameters: [[$class: 'ChoiceParameterDefinition', choices: ACCOUNT_CHOICES.join('\n'), name:'ACCOUNT', description: '']])
 					echo ACCOUNT_PARAMS.ACCOUNT
 					echo "${ACCOUNT}"
 					if (ACCOUNT_PARAMS.ACCOUNT == "Non-prod") {
