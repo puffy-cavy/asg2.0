@@ -23,9 +23,11 @@ pipeline{
 
 					if (ACCOUNT_PARAMS == "Non-prod") {
 						ENV_CHOICES = ["dev", "qa", "stg"];
+						echo ENV_CHOICES
 					}
 					else if (ACCOUNT_PARAMS == "Prod") {
 						ENV_CHOICES = ["uat", "prod"];
+						echo ENV_CHOICES
 					}
 					else {
 						echo 'Input is wrong, go check'
@@ -35,7 +37,7 @@ pipeline{
 
 					env.Profile="work-deploy-non-prod"
 					sh 'chmod 777 aws-setup-credentials.sh'
-                	sh 'source aws-setup-credentials.sh'
+                	sh 'source aws-setup-credentials.sh' //cannot call the shell script without source
 					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
 					 			  	   parameters: [[$class: 'ChoiceParameterDefinition',
                              	  	   choices: APP_CHOICES.join('\n'),
