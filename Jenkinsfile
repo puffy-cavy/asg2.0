@@ -19,7 +19,9 @@ pipeline{
 				script{
 					ACCOUNT_CHOICES = ["Non-prod", "Prod"];
 					def ACCOUNT_PARAMS = input(message: 'The ECS cluster modified is in Prod/ Non-prod account?', id: 'accountChoice',
-					                            parameters: [[$class: 'ChoiceParameterDefinition', name:'ACCOUNT', choices: ACCOUNT_CHOICES.join('\n'), description: '']])
+					                            parameters: [[$class: 'ChoiceParameterDefinition', choices: ACCOUNT_CHOICES.join('\n'), name:'ACCOUNT',description: '']])
+					echo ACCOUNT_PARAMS.ACCOUNT
+					echo "${ACCOUNT}""
 					if (ACCOUNT_PARAMS.ACCOUNT == "Non-prod") {
 						ENV_CHOICES = ["dev", "qa", "stg"];
 					}
@@ -32,7 +34,7 @@ pipeline{
 					APP_CHOICES = ["mpa", "fsn"];
 					
 
-					Profile="work-deploy-non-prod"
+					env.Profile="work-deploy-non-prod"
 					sh 'chmod 777 aws-setup-credentials.sh'
                 	sh 'aws-setup-credentials.sh'
 					def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id: 'applicationChoice',
