@@ -13,6 +13,7 @@ https://stackoverflow.com/questions/47080683/read-interactive-input-in-jenkins-p
 INPUT_PARAMS = input message: 'Choose the application and the environment the autoscaling group belongs to', ok : "Confirm", id: 'applicationChoice',parameters: [choice(name:'APPLICATION', choices: APP_CHOICES, description: '')]
 env.APP_NAME = "${APPLICATION}"
 ```
+(注：如果APPLICATION call不出来，就用INPUT_PARAMS call)
 现在一个页面多个input的时候：
 ```
 def INPUT_PARAMS = input(message: 'Choose the application and the environment the autoscaling group belongs to',id:'applicationChoice',parameters: [[$class: 'ChoiceParameterDefinition',
@@ -27,6 +28,7 @@ def INPUT_PARAMS = input(message: 'Choose the application and the environment th
 					env.ENV_NAME = INPUT_PARAMS.ENVIRONMENT
 ```
 parameters在input里和在script外的表现形式也不一样，，，反正input里的parameters是[]。。。
+wocao 又出现一个傻逼玩意儿，，INPUT_PARAMS.APPLICATION这种retrieve input的格式只用在多个parameter中，只有一个input的时候，直接用INPUT_PARAMS，用INPUT_PARAMS.APPLICATION反而找不着
 #### 3.
 把一个list从bash里传出去：
 ```
