@@ -54,5 +54,9 @@ read进file 再trim
 然后在每一个project里都有Ahthorization,还要选一下run as user who triggered build
 最后在每个project里再选谁可以access
 
+#### 5.
+bash script里用``quote一个command时，=和``中不能有空格，不然会报错
 
+#### 6.
+在Jenkins里if statement比较value，true外面也要套单引号
 		
