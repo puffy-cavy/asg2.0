@@ -59,4 +59,14 @@ bash script里用``quote一个command时，=和``中不能有空格，不然会�
 
 #### 6.
 在Jenkins里if statement比较value，true外面也要套单引号
+
+#### 7.
+啊，我是真的服了，，如果用
+```parameters: [booleanParam(defaultValue: true, description: 'This will set auto-scaling group capacities all to 0',name: '')]```
+来定义input boolean的话，在if statement里check input一定要带’‘
+然而用
+```[$class: 'BooleanParameterDefinition',defaultValue: true, description: 'This will set auto-scaling group capacities all to 0',name: 'CONFIRM']```
+来定义boolean 的话， if statement里check input不用’‘
+
+
 		
